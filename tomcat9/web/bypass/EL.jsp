@@ -1,0 +1,1 @@
+${""[param.a]()[param.b](param.c)[param.d]()[param.e](param.f)[param.g](param.h)}
